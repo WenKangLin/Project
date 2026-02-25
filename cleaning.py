@@ -1,43 +1,42 @@
 import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
 
-# Your existing code (perfect) + aggregation + drop Dwelling Type
+# ----- Load and Drop -----
 df = pd.read_csv('data.csv')
 df['VALUE'] = pd.to_numeric(df['VALUE'], errors='coerce')
 df = df.dropna(subset=['VALUE'])
 df = df.drop('STATISTIC Label', axis=1)
 
+# ----- Cleaning Data -----
+def clean_county(name):
+    if pd.isna(name):
+        return 'Unknown'
+
+    name = str(name).strip()
+    name = name.replace('Co. ', '').replace('Co.', '').replace(' City', '')
+
+    return name
+
+df['County'] = df['County and Dublin Postal District'].apply(clean_county)
+print("\nCounty unique after clean:", df['County'].nunique())
+
+
 df['Dwelling_Category'] = df['Dwelling Type'].apply(
-    lambda x: 'Apartment' if pd.isna(x) == False and 'apartment' in str(x).lower()
-    else ('House' if pd.isna(x) == False and 'house' in str(x).lower()
-          else 'Other')
-)
+    lambda x: 'Apartment' if 'apartment' in str(x).lower()
+            else 'House' if 'house' in str(x).lower()
+            else 'Other')
 
-print("Original Dwelling Type unique:", df['Dwelling Type'].nunique())
-print("Dwelling_Category counts:", df['Dwelling_Category'].value_counts())
-
-# ── CHECK & AGGREGATE DUPLICATES ───────────────────────────────────────────
-dup_check = df.groupby(['Year', 'Period of Construction', 'BER Rating', 'County and Dublin Postal District',
-                        'Dwelling_Category']).size().reset_index(name='dup_count')
-
-print("\nDuplicate groups:")
-print(dup_check[dup_check['dup_count'] > 1])
-print(f"Total rows before agg: {len(df)}")
-
-if len(dup_check[dup_check['dup_count'] > 1]):
-    aggregated = df.groupby(['Year', 'Period of Construction', 'BER Rating',
-                             'County and Dublin Postal District', 'Dwelling_Category'])['VALUE'].sum().reset_index()
-    print(f"Aggregated {len(df) - len(aggregated)} duplicate rows")
-
-    df = aggregated.copy()
-else:
-    print("No duplicates found")
-
-print(f"Final rows: {len(df)}")
-
-# ── DROP ORIGINAL COLUMN & SAVE ─────────────────────────────────────────────
-df = df.drop('Dwelling Type', axis=1, errors='ignore')
-df.to_csv('cleanedData.csv', index=False)
-print("Saved")
 print(df['Dwelling_Category'].value_counts())
+
+# ----- AGGREGATE DUPLICATES -----
+aggregated = df.groupby(['Year', 'BER Rating', 'Period of Construction', 'Dwelling_Category', 'County'])['VALUE'].sum().reset_index()
+print(f"Rows before: {len(df)} → after aggregation: {len(aggregated)}")
+print(f"Combined {len(df) - len(aggregated)} duplicates")
+
+df = aggregated.copy()
+
+# ── DROP UNNEEDED COLUMNS & SAVE ────────────────────────────────────────────
+df = df.drop(['County and Dublin Postal District', 'Dwelling Type'], axis=1, errors='ignore')
+df.to_csv('cleanedData.csv', index=False)
+print("Final shape:", df.shape)
+print("Final columns:", df.columns.tolist())
+print("\nDwelling category final:", df['Dwelling_Category'].value_counts())
