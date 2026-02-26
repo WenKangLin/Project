@@ -2396,7 +2396,6 @@ Year,BER Rating,Period of Construction,Dwelling_Category,County,VALUE
 2022,A2,2020-2024,House,Westmeath,159.0
 2022,A2,2020-2024,House,Wexford,618.0
 2022,A2,2020-2024,House,Wicklow,863.0
-2022,A2,2025-2029,House,Galway,1.0
 2022,A3,2000-2004,Apartment,Cork,1.0
 2022,A3,2000-2004,Apartment,Donegal,1.0
 2022,A3,2000-2004,Apartment,Louth,8.0
@@ -3881,7 +3880,6 @@ Year,BER Rating,Period of Construction,Dwelling_Category,County,VALUE
 2023,A3,2020-2024,House,Westmeath,49.0
 2023,A3,2020-2024,House,Wexford,19.0
 2023,A3,2020-2024,House,Wicklow,5.0
-2023,A3,2025-2029,House,Westmeath,1.0
 2023,B1,2000-2004,Apartment,Cavan,1.0
 2023,B1,2000-2004,Apartment,Clare,1.0
 2023,B1,2000-2004,Apartment,Cork,1.0

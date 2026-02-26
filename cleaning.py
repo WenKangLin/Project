@@ -34,7 +34,11 @@ print(f"Combined {len(df) - len(aggregated)} duplicates")
 
 df = aggregated.copy()
 
-# ── DROP UNNEEDED COLUMNS & SAVE ────────────────────────────────────────────
+# ----- Irregular / Outlier Data -----
+df = df[~((df['Year'] == 2022) & (df['Period of Construction'] == '2025-2029'))]
+df = df[~((df['Year'] == 2023) & (df['Period of Construction'] == '2025-2029'))]
+
+# ----- Saving -----
 df = df.drop(['County and Dublin Postal District', 'Dwelling Type'], axis=1, errors='ignore')
 df.to_csv('cleanedData.csv', index=False)
 print("Final shape:", df.shape)
