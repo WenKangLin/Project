@@ -11,7 +11,7 @@ import requests
 #     'ber', ['#a5b289', '#b7905c', '#a94405', '#91232f', '#6e1449']
 # )
 GEO_CMAP = LinearSegmentedColormap.from_list(
-    'geo', ['#fc5971', '#fc691a', '#f9ad08', '#b3d51e', '#42cc51']
+    'geo', ['#e61d3e', '#fc5971', '#fc691a', '#f9ad08', '#b3d51e', '#42cc51']
 )
 BER_CMAP = GEO_CMAP.reversed()
 
@@ -436,7 +436,7 @@ def graph8(data, cat):
         if row['geometry'] is not None:
             c = row['geometry'].centroid
             ax.annotate(row['County'], xy=(c.x, c.y),
-                        ha='center', fontsize=6.5, fontweight='bold', color='black')
+                        ha='center', fontsize=5.5, fontweight='bold', color='black')
     ax.set_title(f'{cat}s — Avg BER Score by County', fontsize=13, fontweight='bold')
     ax.axis('off')
     plt.tight_layout()
@@ -600,7 +600,23 @@ graph_compare(df_filtered, county_2, col2)
 st.divider()
 st.header("Outcomes and Summary")
 st.markdown("""
+The data conveys clear pictures of Ireland in many terms: BER Ratings of buildings built before and after regulations, the year on year progress of BER ratings and the comparison between counties and more so urban vs rural comparison.
 
+Buildings constructed post 2005 had Irish regulations to be C/D rated or higher depending on criteria. 
+Buildings constructed post 2011 had EU regulations to be A ratings and refurbished buildings had to be B rated.
+Buildings constructed post 2019 had Irish regulations to be A2 rated and refurbished was B2 rated.
+These 3 regulations have a profound effect on our graphs above. We see the data from 2020 onwards that these regulations have a major influence on the overall ratings of these buildings. 
+Newly built apartments, we are able to see that they outperform newly built houses in terms of ratings in our graph, this could be caused by  the smaller floor area of apartments which make it easier to achieve better ratings.
+We are able to see that there is a majority of new buildings being built are houses instead of apartments as well.
+Older dwellings are being refurbished and we can see a decrease each year of C rated dwellings and lower.
+
+On a geographical level, over the last 5 years every county has had an average increase in their BER ratings.
+We aren't too surprised about the results from the Most Improved County Graph, more than half of the counties over the last 5 years have on average gone up one BER rating.
+Urban and commuter counties show stronger average BER scores, driven by a higher proportion of new dwellings. 
+Looking at the average BER of each county the results aren't surprising. There seems to show a correlation of county population and ease of commute to these high population counties and higher average BER ratings. 
+
+This data has shown the immense progress that has been made with BER ratings and in general an overall push towards self sustainability. The number of derelict housing and opportunity for more housing is still high and with the help of grants and other financial aid, these housing could be refurbished and would contribute positively towards the general BER ratings
+Bridging the gap between the newly built A-rated dwellings and the pre 2000 dwellings is the central energy policy challenge visible throughout this data.
 """)
 
 # ----- Footer -----
