@@ -198,7 +198,7 @@ st.markdown("**Insight:** Houses that are just on the minimum requirements and b
 st.divider()
 
 # ========== SECTION 2 ==========
-st.header("📈 Section 2: Trends Over Time")
+st.header("Section 2: Trends Over Time")
 st.markdown("Examines how average BER performance has changed year on year and which counties have improved the most.")
 
 # ----- GRAPH 3: Year-over-Year Avg BER Trend -----
@@ -615,7 +615,12 @@ We aren't too surprised about the results from the Most Improved County Graph, m
 Urban and commuter counties show stronger average BER scores, driven by a higher proportion of new dwellings. 
 Looking at the average BER of each county the results aren't surprising. There seems to show a correlation of county population and ease of commute to these high population counties and higher average BER ratings. 
 
-This data has shown the immense progress that has been made with BER ratings and in general an overall push towards self sustainability. The number of derelict housing and opportunity for more housing is still high and with the help of grants and other financial aid, these housing could be refurbished and would contribute positively towards the general BER ratings
+Something to take into account when seeing these graphs is the disparity in the number of ratings being given out for each county. We are able to see that there may be a correlation between population 
+(higher population means more BER ratings sought; more buildings refurbished and built) which would have a big impact on the skew of the data visualized 
+
+This data has shown the immense progress that has been made with BER ratings and in general an overall push towards self sustainability. 
+The number of derelict housing and opportunity for more housing is still high and with the help of grants and other financial aid, these housing could be refurbished 
+and would contribute positively towards the general BER ratings
 Bridging the gap between the newly built A-rated dwellings and the pre 2000 dwellings is the central energy policy challenge visible throughout this data.
 """)
 
